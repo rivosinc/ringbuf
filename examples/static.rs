@@ -2,10 +2,11 @@
 
 use ringbuf::StaticRb;
 
+const RB_SIZE: usize = 1;
+static mut RB: StaticRb::<i32, RB_SIZE> = StaticRb::<i32, RB_SIZE>::const_default();
+
 fn main() {
-    const RB_SIZE: usize = 1;
-    let mut rb = StaticRb::<i32, RB_SIZE>::default();
-    let (mut prod, mut cons) = rb.split_ref();
+    let (mut prod, mut cons) = unsafe { RB.split_ref() };
 
     assert_eq!(prod.push(123), Ok(()));
     assert_eq!(prod.push(321), Err(321));

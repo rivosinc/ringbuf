@@ -38,3 +38,9 @@ impl<T> SharedRb<T, Vec<MaybeUninit<T>>> {
         unsafe { Self::from_raw_parts(data, 0, 0) }
     }
 }
+
+impl<T, const N: usize> SharedRb<T, [MaybeUninit<T>; N]> {
+    pub const fn const_default() -> Self {
+        unsafe { Self::from_raw_parts(uninit_array(), 0, 0) }
+    }
+}

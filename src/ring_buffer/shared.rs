@@ -93,7 +93,7 @@ impl<T, C: Container<T>> SharedRb<T, C> {
     ///
     /// The items in container inside `head..tail` range must be initialized, items outside this range must be uninitialized.
     /// `head` and `tail` values must be valid (see [`RbBase`](`crate::ring_buffer::RbBase`)).
-    pub unsafe fn from_raw_parts(container: C, head: usize, tail: usize) -> Self {
+    pub const unsafe fn from_raw_parts(container: C, head: usize, tail: usize) -> Self {
         Self {
             storage: SharedStorage::new(container),
             head: CachePadded::new(AtomicUsize::new(head)),

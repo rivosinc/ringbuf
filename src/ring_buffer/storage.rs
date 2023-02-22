@@ -82,8 +82,8 @@ impl<T, C: Container<T>> SharedStorage<T, C> {
     /// Create new storage.
     ///
     /// *Panics if container is empty.*
-    pub fn new(container: C) -> Self {
-        assert!(!container.is_empty());
+    pub const fn new(container: C) -> Self {
+        //assert!(!container.is_empty());
         Self {
             container: UnsafeCell::new(container),
             _phantom: PhantomData,
